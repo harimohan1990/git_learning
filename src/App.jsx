@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Learn from './pages/Learn';
 import Playground from './pages/Playground';
 import Linux from './pages/Linux';
+import Chatbot from './components/ui/Chatbot';
 
 function Footer() {
   const { pathname } = useLocation();
@@ -41,6 +42,7 @@ export default function App() {
         <Route path="/linux" element={<Linux />} />
       </Routes>
       <Footer />
+      <Chatbot />
     </BrowserRouter>
   );
 }

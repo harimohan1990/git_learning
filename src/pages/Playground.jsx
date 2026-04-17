@@ -391,37 +391,34 @@ export default function Playground() {
   return (
     <div className="flex flex-col h-screen pt-[65px] bg-[#0d1117]">
       {/* ── top bar ── */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-[#21262d] bg-[#161b22]">
-        <div className="flex items-center gap-3">
-          <span className="text-sm font-semibold text-white">Git Playground</span>
+      <div className="flex items-center justify-between px-3 sm:px-4 py-2 border-b border-[#21262d] bg-[#161b22] gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-sm font-semibold text-white shrink-0">Playground</span>
           {store.initialized && (
-            <span className="text-xs bg-[#0d1117] border border-[#21262d] text-orange-400 px-2 py-0.5 rounded font-mono">
+            <span className="text-xs bg-[#0d1117] border border-[#21262d] text-orange-400 px-2 py-0.5 rounded font-mono truncate">
               ⎇ {store.currentBranch}
             </span>
           )}
         </div>
-        <div className="flex items-center gap-2 flex-wrap">
-          {Object.values(branches).map((b) => (
-            <div key={b.name} className="flex items-center gap-1 text-xs text-[#8b949e]">
+        <div className="flex items-center gap-1.5 flex-wrap justify-end">
+          {Object.values(branches).slice(0, 3).map((b) => (
+            <div key={b.name} className="hidden sm:flex items-center gap-1 text-xs text-[#8b949e]">
               <span className="w-2 h-2 rounded-full shrink-0" style={{ background: b.color }} />
-              {b.name}
+              <span className="truncate max-w-[60px]">{b.name}</span>
             </div>
-          ))}
-          {Object.keys(tags).map((t) => (
-            <span key={t} className="text-xs text-yellow-400 bg-yellow-400/10 px-1.5 py-0.5 rounded">🏷 {t}</span>
           ))}
           <button
             onClick={() => store.reset()}
-            className="text-xs text-[#6e7681] hover:text-red-400 border border-[#21262d] hover:border-red-400/50 px-3 py-1 rounded transition-colors ml-2"
+            className="text-xs text-[#6e7681] hover:text-red-400 border border-[#21262d] hover:border-red-400/50 px-2.5 py-1 rounded transition-colors"
           >
             Reset
           </button>
         </div>
       </div>
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
         {/* ── 3D Graph ── */}
-        <div className="flex-1 relative">
+        <div className="flex-1 relative min-h-[250px]">
           <GraphView
             commits={store.commits}
             branches={store.branches}
@@ -442,7 +439,7 @@ export default function Playground() {
         </div>
 
         {/* ── Right panel ── */}
-        <div className="w-[360px] flex flex-col border-l border-[#21262d] bg-[#0d1117]">
+        <div className="w-full md:w-[360px] flex flex-col border-t md:border-t-0 md:border-l border-[#21262d] bg-[#0d1117]">
           {/* tabs */}
           <div className="flex border-b border-[#21262d]">
             {['terminal', 'scenarios'].map((tab) => (
